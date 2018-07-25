@@ -31,7 +31,9 @@ public class Roster {
 		//The following methods, shown below, are each called in order.
 		print_all();
 		print_invalid_emails();
-		print_average_grade();
+		for (Student s : rosterStudents) {
+			print_average_grade(s.getStudentID());
+		}
 		remove("3");
 		remove("3");
 	}
@@ -66,15 +68,24 @@ public class Roster {
 			}
 		}
 	}
-	public static void print_average_grade(){
+		public static void print_average_grade(String studentID) {
 
 		//Get each grade for each student in rosterStudents ArrayList. Then calculate an average
 		//by summing them, and dividing by the total number of grades, in this case, 3. Then
 		//print out each average grade for each student.
-		for (Student s : rosterStudents){
-			double average = (s.getGrades()[0] + s.getGrades()[1] + s.getGrades()[2]) / 3.0;
-			System.out.println("Student " + s.getStudentID() + "'s Average Grade = " + average);
+
+		for (int i = 0; i < rosterStudents.size(); i++) {
+			if (rosterStudents.get(i).getStudentID().equals(studentID)) {
+				double average = ((rosterStudents.get(i).getGrades()[0] + rosterStudents.get(i).getGrades()[1] + rosterStudents.get(i).getGrades()[2]) / 3.0);
+				System.out.println("Student " + studentID + "'s Average Grade = " + average);
+				return;
+			}
 		}
+		//Code below replaced by for and if statements above
+		//for (Student s : rosterStudents) {
+		//	double average = (s.getGrades()[0] + s.getGrades()[1] + s.getGrades()[2]) / 3.0;
+		//	System.out.println("Student " + studentID + "'s Average Grade = " + average);
+		//}
 	}
 	
 	public static void remove(String studentID){
